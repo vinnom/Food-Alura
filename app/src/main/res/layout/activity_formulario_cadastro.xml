@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".FormularioCadastroActivity">
+        tools:context=".ui.atividades.FormularioCadastroActivity">
 
         <TextView
             android:id="@+id/formulario_cadastro_dados_pessoais"
@@ -106,7 +106,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/formulario_cadastro_email"
             app:layout_constraintStart_toStartOf="@id/formulario_cadastro_email"
-            app:layout_constraintTop_toBottomOf="@id/formulario_cadastro_email">
+            app:layout_constraintTop_toBottomOf="@id/formulario_cadastro_email"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
