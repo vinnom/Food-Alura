@@ -8,34 +8,34 @@ import com.google.android.material.textfield.TextInputLayout;
 import br.com.caelum.stella.validation.CPFValidator;
 import br.com.caelum.stella.validation.InvalidStateException;
 
-public class ValidadorCPF extends ValidadorPadrao {
+class ValidadorCPF {
 
 	private static final String DEVE_CONTER_ONZE_DIGITOS = "CPF deve conter 11 dígitos";
 	private static final String CPF_INVALIDO = "CPF Inválido";
 	private static final String VALIDADOR_CPF = "ValidadorCPF";
 	private static final String EXCECAO = "exceção: ";
-	private TextInputLayout inputLayout;
-	private CPFValidator validador;
-	private FormatadorCPF formatador;
+	private final TextInputLayout inputLayout;
+	private final CPFValidator validador;
+	private final FormatadorCPF formatador;
 
 	public ValidadorCPF(TextInputLayout inputLayout) {
-		super(inputLayout);
 		this.inputLayout = inputLayout;
 		this.validador = new CPFValidator();
 		this.formatador = new FormatadorCPF();
 	}
 
-	@Override
 	protected void removeErro() {
+		//noinspection ConstantConditions
 		String cpfFormatado = inputLayout.getEditText().getText().toString();
 		String cpf = formatador.desformata(cpfFormatado);
 		inputLayout.getEditText().setText(cpf);
 	}
 
-	@Override
+	@SuppressWarnings("ConstantConditions")
 	public boolean valida() {
+		removeErro();
 		String cpf = inputLayout.getEditText().getText().toString();
-		if(cpf.length() != 11) {
+		if(naoContemOnzeDigitos(cpf)) {
 			inputLayout.setError(DEVE_CONTER_ONZE_DIGITOS);
 			return false;
 		} else {
@@ -48,9 +48,18 @@ public class ValidadorCPF extends ValidadorPadrao {
 			}
 		}
 
-		String cpfFormatado = formatador.formata(cpf);
-		inputLayout.getEditText().setText(cpfFormatado);
+		formata(cpf);
 
 		return true;
+	}
+
+	private boolean naoContemOnzeDigitos(String cpf) {
+		return cpf.length() != 11;
+	}
+
+	private void formata(String cpf) {
+		String cpfFormatado = formatador.formata(cpf);
+		// noinspection ConstantConditions
+		inputLayout.getEditText().setText(cpfFormatado);
 	}
 }

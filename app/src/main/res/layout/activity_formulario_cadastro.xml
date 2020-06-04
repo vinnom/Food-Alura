@@ -118,6 +118,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/formulario_cadastro_cadastrar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/cadastrar"

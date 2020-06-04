@@ -11,6 +11,7 @@ abstract class ValidadorPadrao {
 		this.inputLayout = inputLayout;
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	protected boolean validaCampoObrigatorio() {
 		String texto = inputLayout.getEditText().getText().toString();
 		if(texto.isEmpty()) {
@@ -21,11 +22,12 @@ abstract class ValidadorPadrao {
 		return true;
 	}
 
-	protected void removeErro() {
+	public void removeErro() {
 		this.inputLayout.setError(null);
 		this.inputLayout.setErrorEnabled(false);
 	}
 
+	@SuppressWarnings("unused")
 	public abstract boolean valida();
 
 }
